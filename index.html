@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,32 +6,9 @@
 <meta http-equiv="X-UA-Compatible" content="ie=edge" />
 <title>AGL Dev Test by Khizar</title>
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-<script>
+	<script>
 		/*
-		 * @version 1.0.0
-		 * @author: Khizar
-		 *
-		 * parse the result object to filter out the pet name, sorted ASC.
-		 * @todo: move to deparate .js for easier management
-		 * @todo: You can make it dynamic to handle the owner gender as well
-		*/
-		
-		function getThePet(result,petName) {
-			var lovely_pets = [];
-			for ( var i = 0; i < result.length; i++) 
-				for ( var key in result[i]) {
-					theValue = result[i][key];
-					if(theValue === Object(theValue) && theValue != null) //pets
-						for ( var k in theValue) {
-							if(theValue[k].type.toString() == petName)
-								lovely_pets.push(theValue[k].name.toString());
-					}
-				}
-			return lovely_pets.sort();
-		}
-		
-		/*
-		 * @version 1.0.0
+		 * @version 1.0.1
 		 * @author: Khizar
 		 *
 		 * Call API to get responce data in JSON, parse it to filter out the pet name grouped by owner gender.
@@ -99,21 +75,47 @@
 			})
 		}
     </script>
-<script>
-
-    // ********** Config
-    const url = 'http://agl-developer-test.azurewebsites.net/people.json'; //can move to config
-    const petName = "Cat"; // possible values: Cat | Dog | Fish
     
-    // ********** Cal
-    makeGetRequest(url,petName, true);
-
-</script>
+	<script>		
+		/*
+		 * @version 1.0.1
+		 * @author: Khizar
+		 *
+		 * parse the result object to filter out the pet name, sorted ASC.
+		 * @todo: move to deparate .js for easier management
+		 * @todo: You can make it dynamic to handle the owner gender as well
+		*/		
+		function getThePet(result,petName) {
+			var lovely_pets = [];
+			for ( var i = 0; i < result.length; i++) 
+				for ( var key in result[i]) {
+					theValue = result[i][key];
+					if(theValue === Object(theValue) && theValue != null) //pets
+						for ( var k in theValue) {
+							if(theValue[k].type.toString() == petName)
+								lovely_pets.push(theValue[k].name.toString());
+					}
+				}
+			return lovely_pets.sort();
+		}
+		
+    </script>
+    
+	<script>
+    
+        // ********** Config
+        const url = 'http://agl-developer-test.azurewebsites.net/people.json'; //can move to config
+        const petName = "Cat"; // possible values: Cat | Dog | Fish
+        
+        // ********** Call
+        makeGetRequest(url,petName, true);
+    
+    </script>
 </head>
 
 <body>
 <div id="thePetsList">
-  <h1>Sorted Cat names, grouped by their owners gender</h1>
+  <h1>Cats, grouped by their owner's gender</h1>
   <h2>Female</h2>
   <ul id="femaleOwners">
   </ul>
