@@ -1,0 +1,125 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta http-equiv="X-UA-Compatible" content="ie=edge" />
+<title>AGL Dev Test by Khizar</title>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script>
+		/*
+		 * @version 1.0.0
+		 * @author: Khizar
+		 *
+		 * parse the result object to filter out the pet name, sorted ASC.
+		 * @todo: move to deparate .js for easier management
+		 * @todo: You can make it dynamic to handle the owner gender as well
+		*/
+		
+		function getThePet(result,petName) {
+			var lovely_pets = [];
+			for ( var i = 0; i < result.length; i++) 
+				for ( var key in result[i]) {
+					theValue = result[i][key];
+					if(theValue === Object(theValue) && theValue != null) //pets
+						for ( var k in theValue) {
+							if(theValue[k].type.toString() == petName)
+								lovely_pets.push(theValue[k].name.toString());
+					}
+				}
+			return lovely_pets.sort();
+		}
+		
+		/*
+		 * @version 1.0.0
+		 * @author: Khizar
+		 *
+		 * Call API to get responce data in JSON, parse it to filter out the pet name grouped by owner gender.
+		 * @todo: move to deparate .js for easier management
+		 * @todo: to tidy up the code, within Axio call, make a funciton to parse and load the response data.
+		*/
+		async function makeGetRequest(url, petName, debug = false) {
+			
+			if(debug){
+				
+				// declare a request interceptor
+				axios.interceptors.request.use(config => {
+				  console.log('Request was sent');
+				  return config;
+				}, error => {
+				  return Promise.reject(error);
+				});
+				
+				// declare a response interceptor
+				axios.interceptors.response.use((response) => {
+				  console.log('Response was received');
+				  return response;
+				}, error => {
+				  return Promise.reject(error);
+				});
+			}
+			
+			// Call the API
+			axios.get(url)
+			.then(response => {
+				if (response.status === 200) {
+				
+					//Get Female members					
+					var result = response.data.filter(function(e) {	//Get Female members
+					  return ["Female"].includes(e.gender);
+					});					
+					var myPets = getThePet(result,petName); 		//Get the pet
+					if(debug) console.log("Female:" + myPets);
+					
+					myPets.forEach(function(name){  				//Display the pet
+						var li = document.createElement('li'); 
+						femaleOwners.appendChild(li);
+						li.innerHTML += name;
+					});
+					
+					var result = response.data.filter(function(e) {	//Get Male members
+					  return ["Male"].includes(e.gender);
+					});
+					
+					var myPets = getThePet(result,petName);			//Get the pet
+					if(debug) console.log("Male:" + myPets);
+					
+					myPets.forEach(function(name){					//Display the pet
+						var li = document.createElement('li');
+						maleOwners.appendChild(li);
+						li.innerHTML += name;
+					});
+				}
+				else 
+					throw new Error("Error:"); // throw error and go to catch block
+			})
+			.catch(error => {
+				console.log(error);
+			})
+		}
+    </script>
+<script>
+
+    // ********** Config
+    const url = 'http://agl-developer-test.azurewebsites.net/people.json'; //can move to config
+    const petName = "Cat"; // possible values: Cat | Dog | Fish
+    
+    // ********** Cal
+    makeGetRequest(url,petName, true);
+
+</script>
+</head>
+
+<body>
+<div id="thePetsList">
+  <h1>Sorted Cat names, grouped by their owners gender</h1>
+  <h2>Female</h2>
+  <ul id="femaleOwners">
+  </ul>
+  <h2>Male</h2>
+  <ul id="maleOwners">
+  </ul>
+</div>
+</body>
+</html>
