@@ -22,4 +22,12 @@ Axios in JavaScript, with request and response _interceptors_.
 Version 1.0.1 built and released.
 
 ## Debugging
-The function **makeGetRequest(url,petName, true);** 3rd parameter is a debug parameter, which can be set to true/false to log/hide console messages. 
+The function **makeGetRequest(url,petName, true);** 3rd parameter is a debug parameter, which can be set to true/false to log/hide console messages.
+
+## Enhancements
+We can possibly:
+ - Add a _Loading_ GIF **Or** progress bar (for larger response)
+ - Set API call timeout
+ - Validate JSON
+ - Show error messages on screen
+ - Log to 3rd party logger
