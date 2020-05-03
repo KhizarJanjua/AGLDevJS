@@ -13,7 +13,7 @@ A development task to demonstrate how quickly we can roll out a project that con
 Just download the index.html and run it in any browser. It will call the AGL API, parse the JSON response and display the sorted results.
 
 ## Features
-The main function **makeGetRequest(url,petName, true);** accepts petName (Cat | Dog | Fish), checkes for the API availbility and parse the JSON to display the sorted <ul> items.
+The main function **makeGetRequest(url,petName, true);** accepts petName (Cat | Dog | Fish), checkes for the API availbility and parse the JSON to display the sorted ul items.
   
 ## Tech/framework used
 Axios in JavaScript, with request and response _interceptors_.
