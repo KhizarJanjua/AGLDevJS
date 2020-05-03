@@ -1,6 +1,6 @@
 # AGL Development Test
 
-## Pets Name by owner gender
+## Pet's Name by owner gender
 A small JavaScript code to call an API using Axios, parse the JSON and display all _Cats_ grouped by their owner gender.
 
 ## Motivation
@@ -20,3 +20,6 @@ A short and concise solution to the given problem, no heavy dependencies, compac
 
 ## How to use?
 Just download the index.html and run it in any browser. It will call the AGL API, parse the JSON response and display the sorted results.
+
+## Debugging
+The main function **makeGetRequest(url,petName, true);** accepts petName (Cat | Dog | Fish) and debug: true/false to log/hide console messages. 
