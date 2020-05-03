@@ -4,10 +4,10 @@
 A small JavaScript code to call an API using Axios, parse the JSON and display all _Cats_ grouped by their owner gender.
 
 ## Motivation
-A development task to demostrate how quickly we can roll out a project that consumes an API.
+A development task to demonstrate how quickly we can roll out a project that consumes an API.
 
 ## Build status
-Version 1.0.1 built and relased
+Version 1.0.1 built and released
 
 ## Screenshots
 ![Alt text](/AGL-Dev-Screenshot.png?raw=true "Cats, grouped by their owner name")
